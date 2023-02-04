@@ -12,6 +12,8 @@ console.log({ answer });
 
 function Game() {
 	const [guessList, setGuessList] = React.useState([]);
+	const [win, setWin] = React.useState(false);
+	const [tries, setNumberOfTries] = React.useState(0);
 
 	function handleSubmit(guess) {
 		// Change guess input to upper case
@@ -29,6 +31,12 @@ function Game() {
 		console.log([...guessList, newGuess]);
 		// Push new guess object
 		setGuessList([...guessList, newGuess]);
+
+		if (guess === answer.toString()) {
+			setWin(true);
+		}
+
+		setNumberOfTries(tries + 1);
 	}
 
 	return (
@@ -38,7 +46,13 @@ function Game() {
 				numberOfGuesses={NUM_OF_GUESSES_ALLOWED}
 				answer={answer}
 			/>
-			<Guess handleSubmit={handleSubmit} />
+			<Guess
+				handleSubmit={handleSubmit}
+				win={win}
+				tries={tries}
+				numberOfGuesses={NUM_OF_GUESSES_ALLOWED}
+				answer={answer}
+			/>
 		</>
 	);
 }

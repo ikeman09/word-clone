@@ -1,6 +1,6 @@
 import React from "react";
 
-function Guess({ handleSubmit }) {
+function Guess({ handleSubmit, win, tries, numberOfGuesses, answer }) {
 	const [guess, setGuess] = React.useState("");
 
 	function handleChange(event) {
@@ -18,6 +18,27 @@ function Guess({ handleSubmit }) {
 			}}
 		>
 			<label htmlFor="guess-input">Enter guess: </label>
+			{win ? (
+				<div className="happy banner">
+					<p>
+						<strong>Congratulations! </strong>
+						Got it in{" "}
+						<strong>
+							{tries} {tries === 1 ? "guess" : "guesses"}
+						</strong>
+					</p>
+				</div>
+			) : (
+				tries === numberOfGuesses &&
+				!win && (
+					<div className="sad banner">
+						<p>
+							Sorry, the correct answer is
+							<strong> {answer}</strong>.
+						</p>
+					</div>
+				)
+			)}
 			<input
 				id="guess-input"
 				type="text"
@@ -25,6 +46,7 @@ function Guess({ handleSubmit }) {
 				onChange={handleChange}
 				minLength={5}
 				maxLength={5}
+				disabled={win || tries === numberOfGuesses}
 			></input>
 		</form>
 	);
