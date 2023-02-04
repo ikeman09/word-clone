@@ -36,6 +36,7 @@ function Game() {
 			<GuessList
 				guessList={guessList}
 				numberOfGuesses={NUM_OF_GUESSES_ALLOWED}
+				answer={answer}
 			/>
 			<Guess handleSubmit={handleSubmit} />
 		</>
