@@ -20,6 +20,7 @@ export function checkGuess(guess, answer) {
 		return {
 			letter: guessChar,
 			status,
+			id: crypto.randomUUID(),
 		};
 	});
 }

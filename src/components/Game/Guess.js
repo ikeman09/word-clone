@@ -4,7 +4,7 @@ function Guess({ handleSubmit, win, tries, numberOfGuesses, answer }) {
 	const [guess, setGuess] = React.useState("");
 
 	function handleChange(event) {
-		const guess = event.target.value;
+		const guess = event.target.value.toUpperCase();
 		setGuess(guess);
 	}
 
@@ -44,6 +44,7 @@ function Guess({ handleSubmit, win, tries, numberOfGuesses, answer }) {
 				type="text"
 				value={guess}
 				onChange={handleChange}
+				pattern="[a-zA-Z]{5}"
 				minLength={5}
 				maxLength={5}
 				disabled={win || tries === numberOfGuesses}

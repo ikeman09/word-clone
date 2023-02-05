@@ -15,8 +15,10 @@ function GuessList({ guessList, numberOfGuesses, answer }) {
 									</span>
 							  ))
 							: checkGuess(guessList[order].guess, answer).map(
-									({ letter, status }) => (
-										<span className={`cell ${status}`}>{letter}</span>
+									({ letter, status, id }) => (
+										<span key={id} className={`cell ${status}`}>
+											{letter}
+										</span>
 									)
 							  )}
 					</div>

@@ -28,14 +28,15 @@ function Game() {
 			id: crypto.randomUUID(),
 		};
 
-		console.log([...guessList, newGuess]);
 		// Push new guess object
 		setGuessList([...guessList, newGuess]);
 
+		// Check if player won
 		if (guess === answer.toString()) {
 			setWin(true);
 		}
 
+		// Increment number of tries
 		setNumberOfTries(tries + 1);
 	}
 
