@@ -12,7 +12,7 @@ console.log({ answer });
 
 function Game() {
 	const [guessList, setGuessList] = React.useState([]);
-	const [win, setWin] = React.useState(false);
+	const [status, setStatus] = React.useState("playing");
 	const [tries, setNumberOfTries] = React.useState(0);
 
 	function handleSubmit(guess) {
@@ -28,16 +28,24 @@ function Game() {
 			id: crypto.randomUUID(),
 		};
 
+		// Create new guess list
+		const nextGuesses = [...guessList, newGuess];
+
 		// Push new guess object
-		setGuessList([...guessList, newGuess]);
+		setGuessList(nextGuesses);
 
 		// Check if player won
 		if (guess === answer.toString()) {
-			setWin(true);
+			setStatus("win");
 		}
 
 		// Increment number of tries
 		setNumberOfTries(tries + 1);
+
+		// Check if player lost
+		if (nextGuesses.length >= NUM_OF_GUESSES_ALLOWED) {
+			setStatus("lose");
+		}
 	}
 
 	return (
@@ -49,7 +57,7 @@ function Game() {
 			/>
 			<Guess
 				handleSubmit={handleSubmit}
-				win={win}
+				status={status}
 				tries={tries}
 				numberOfGuesses={NUM_OF_GUESSES_ALLOWED}
 				answer={answer}
